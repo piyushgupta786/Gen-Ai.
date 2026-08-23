@@ -12,7 +12,7 @@ async function UserRegister ( req ,res) {
         })
     }
 
-    const isUserAlreadyExists = await usermodel.findOne({
+    const isUserAlreadyExists = await userModel.findOne({
         $or : [{username},{email}]
     })
 
@@ -24,7 +24,7 @@ async function UserRegister ( req ,res) {
 
     const hash = await bcrypt.hash(password , 10)
 
-    const newUser = new userModel.create({
+    const user = await userModel.create({
         username,
         email,
         password: hash 
@@ -33,7 +33,7 @@ async function UserRegister ( req ,res) {
     const token = jwt.sign( 
         {id:user._id , username: user.username}
         ,process.env.JWT_SECRET_KEY,
-        { expiresIN : "1d"}
+        { expiresIn: "1d"}
     )
 
     res.cookie("token",token)
@@ -69,9 +69,10 @@ async function UserRegister ( req ,res) {
         })
     }
 
-    const token = jwt.sign({id : user._id , username : user.username },
+    const token = jwt.sign(
+        {id : user._id , username : user.username },
          process.env.JWT_SECRET_KEY, 
-         {expiresIN : "1d"})
+         {expiresIn : "1d"})
 
          res.cookie("token",token)
 
