@@ -1,11 +1,8 @@
 const userModel = require('../models/user.model')
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-<<<<<<< HEAD
 const blacklistTokenModel = require('../models/blacklist.model')
 
-=======
->>>>>>> de0216fdcb2be9d5a75226350dfd8a455a0dfb73
 
 
 async function UserRegister ( req ,res) {
@@ -92,7 +89,6 @@ async function UserRegister ( req ,res) {
 
  }
 
-<<<<<<< HEAD
  async function logoutUser(req,res){
     const token = req.cookies.token
     
@@ -120,6 +116,3 @@ async function UserRegister ( req ,res) {
  }
 
 module.exports = {UserRegister , loginUser , logoutUser , getme}
-=======
-module.exports = {UserRegister , loginUser}
->>>>>>> de0216fdcb2be9d5a75226350dfd8a455a0dfb73
