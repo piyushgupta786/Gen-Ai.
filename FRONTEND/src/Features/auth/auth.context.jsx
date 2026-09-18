@@ -1,22 +1,24 @@
-import { createContext,useState } from "react";
-
+import { createContext, useState, useEffect } from "react";
+import { getMe } from "./services/auth.api";
 
 export const AuthContext = createContext()
 
-
-export const AuthProvider = ({ children }) => { 
+export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
-    
-
+    useEffect(() => {
+        getMe()
+            .then(data => setUser(data.user))
+            .catch(() => setUser(null))   // logged-out hona normal hai, error mat dikhao
+            .finally(() => setLoading(false))
+    }, [])
 
     return (
-        <AuthContext.Provider value={{user,setUser,loading,setLoading}} >
+        <AuthContext.Provider value={{ user, setUser, loading, setLoading, error, setError }}>
             {children}
         </AuthContext.Provider>
     )
-
-    
 }

@@ -371,3 +371,12 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
         }
     }
 }
+
+.dropzone--active {
+    border-color: #ec4899;
+    background: rgba(236, 72, 153, 0.08);
+}
+
+.dropzone--filled {
+    border-color: #22c55e;
+}

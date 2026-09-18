@@ -45,14 +45,7 @@ const RoadMapDay = ({ day }) => (
             <span className='roadmap-day__badge'>Day {day.day}</span>
             <h3 className='roadmap-day__focus'>{day.focus}</h3>
         </div>
-        <ul className='roadmap-day__tasks'>
-            {day.tasks.map((task, i) => (
-                <li key={i}>
-                    <span className='roadmap-day__bullet' />
-                    {task}
-                </li>
-            ))}
-        </ul>
+        <p className='roadmap-day__tasks'>{day.task}</p>
     </div>
 )
 
@@ -180,7 +173,7 @@ const Interview = () => {
                         <div className='skill-gaps__list'>
                             {report.skillGaps.map((gap, i) => (
                                 <span key={i} className={`skill-tag skill-tag--${gap.severity}`}>
-                                    {gap.skill}
+                                    {gap.skills}
                                 </span>
                             ))}
                         </div>

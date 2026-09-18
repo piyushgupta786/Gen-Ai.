@@ -5,9 +5,24 @@ const {generateInterviewReport , generateResumePdf} = require("../services/ai.se
 
 async function generateInterViewReportController(req, res) {
 
-    const resumeContent = await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
-    const { selfDescription, jobDescription } = req.body
+    let resumeContent = { text: "" }
 
+if (req.file) {
+    const parser = new pdfParse.PDFParse({ data: req.file.buffer })
+    resumeContent = await parser.getText()
+    await parser.destroy()   // cleanup, memory leak se bachne ke liye
+}
+
+const { selfDescription, jobDescription } = req.body
+
+const hasResume = resumeContent.text && resumeContent.text.trim().length >= 50
+const hasSelfDescription = selfDescription && selfDescription.trim().length >= 20
+
+if (!hasResume && !hasSelfDescription) {
+    return res.status(400).json({
+        message: "Either a Resume or a Self Description is required to generate a report."
+    })
+}
 
      const interViewReportByAi = await generateInterviewReport({
         resume: resumeContent.text,

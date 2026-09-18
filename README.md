@@ -40,15 +40,7 @@ An AI-powered full-stack web application that helps users prepare for technical 
 ```
 Frontend/
 Backend/
-```
-
-## Installation
-
-### Clone Repository
-
-```bash
-git clone https://github.com/piyushgupta786/AI-Powered-Interview-Prep.git
-```
+``
 
 ### Backend
 
